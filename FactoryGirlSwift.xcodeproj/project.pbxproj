@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A790EE2197018FD00A068B0 /* FactoryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A790EE1197018FD00A068B0 /* FactoryBuilder.swift */; };
+		0A790EE419701BE000A068B0 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A790EE319701BE000A068B0 /* Factory.swift */; };
+		0A790EE619701C2A00A068B0 /* FactoryBuildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A790EE519701C2A00A068B0 /* FactoryBuildable.swift */; };
 		B0050B4C194DBE1A00768AD7 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B0050B4A194DBE1A00768AD7 /* Model.xcdatamodeld */; };
 		B0050B50194DC14100768AD7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0050B4F194DC14100768AD7 /* User.swift */; };
 		B0050B52194DC21400768AD7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0050B51194DC21400768AD7 /* Post.swift */; };
@@ -31,6 +34,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A790EE1197018FD00A068B0 /* FactoryBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FactoryBuilder.swift; sourceTree = "<group>"; };
+		0A790EE319701BE000A068B0 /* Factory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		0A790EE519701C2A00A068B0 /* FactoryBuildable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FactoryBuildable.swift; sourceTree = "<group>"; };
 		B0050B4B194DBE1A00768AD7 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		B0050B4F194DC14100768AD7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B0050B51194DC21400768AD7 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -109,6 +115,9 @@
 			children = (
 				B0050B55194DFCA400768AD7 /* DSL.swift */,
 				B061794D1947A8EF00BABFDF /* FactoryGirl.swift */,
+				0A790EE519701C2A00A068B0 /* FactoryBuildable.swift */,
+				0A790EE1197018FD00A068B0 /* FactoryBuilder.swift */,
+				0A790EE319701BE000A068B0 /* Factory.swift */,
 				B06179311947A8BE00BABFDF /* AppDelegate.swift */,
 				B0050B4E194DC02B00768AD7 /* Core Data */,
 				B0050B4D194DC01D00768AD7 /* NSObjects */,
@@ -244,8 +253,11 @@
 				B061794B1947A8DC00BABFDF /* Feed.swift in Sources */,
 				B0050B50194DC14100768AD7 /* User.swift in Sources */,
 				B0050B56194DFCA400768AD7 /* DSL.swift in Sources */,
+				0A790EE619701C2A00A068B0 /* FactoryBuildable.swift in Sources */,
 				B0050B54194DC3FD00768AD7 /* Comment.swift in Sources */,
 				B0050B4C194DBE1A00768AD7 /* Model.xcdatamodeld in Sources */,
+				0A790EE2197018FD00A068B0 /* FactoryBuilder.swift in Sources */,
+				0A790EE419701BE000A068B0 /* Factory.swift in Sources */,
 				B061794E1947A8EF00BABFDF /* FactoryGirl.swift in Sources */,
 				B0050B52194DC21400768AD7 /* Post.swift in Sources */,
 				B061794C1947A8DC00BABFDF /* FeedItem.swift in Sources */,
