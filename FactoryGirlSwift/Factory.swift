@@ -103,7 +103,7 @@ class Factory {
         }
     }
     
-    func _makeBaseObject(style: FactoryBuilder.FactoryBuildStyle, _ managedObjectContext: NSManagedObjectContext?) -> FactoryBuildable {
+    func _makeBaseObject(style: FactoryBuildStyle, _ managedObjectContext: NSManagedObjectContext?) -> FactoryBuildable {
         switch style {
         case .Object:
             return objectBuilder!()
@@ -114,7 +114,7 @@ class Factory {
         }
     }
     
-    func _buildable(style: FactoryBuilder.FactoryBuildStyle) -> Bool {
+    func _buildable(style: FactoryBuildStyle) -> Bool {
         switch style {
         case .Object:
             // TODO: fix workaround. See https://devforums.apple.com/message/1000640#1000640

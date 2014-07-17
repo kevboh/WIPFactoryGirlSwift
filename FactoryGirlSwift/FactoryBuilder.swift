@@ -9,21 +9,16 @@
 import Foundation
 import CoreData
 
+enum FactoryBuildStyle {
+    case Object
+    case Dictionary
+    case ManagedObject
+}
+
 class FactoryBuilder {
-    
-    enum FactoryBuildStyle {
-        case Object
-        case Dictionary
-        case ManagedObject
-    }
-    
     var buildStyle: FactoryBuildStyle = .Object
     var managedObjectContext: NSManagedObjectContext?
     let definedFactories: Dictionary<String, Factory>
-    
-    init(factories: Dictionary<String, Factory>) {
-        self.definedFactories = factories
-    }
     
     convenience init(style: FactoryBuildStyle, factories: Dictionary<String, Factory>) {
         self.init(factories: factories)
@@ -34,6 +29,10 @@ class FactoryBuilder {
         self.init(factories: factories)
         self.buildStyle = .ManagedObject
         self.managedObjectContext = managedObjectContext
+    }
+    
+    init(factories: Dictionary<String, Factory>) {
+        self.definedFactories = factories
     }
     
     func build(factoryName: String, alteredDefinition: Factory.InstanceDefinition?) -> FactoryBuildable? {
