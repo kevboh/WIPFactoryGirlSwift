@@ -13,6 +13,8 @@ class Feed: NSObject {
     var timestamp: NSDate?
     var userID: NSNumber?
     var items: [FeedItem]?
+    var firstItem: FeedItem?
+    var lastItem: FeedItem?
     override var description: String {
         return "\nFeed titled \(title) for user \(userID) at \(timestamp), items: \(items)"
     }

@@ -14,6 +14,7 @@ class FactoryGirlSwiftTests: XCTestCase {
     
     class var factoryGirl: FactoryGirl {
         struct Static {
+            
             static let instance: FactoryGirl = FactoryGirl() { factoryGirl in
                 factoryGirl.define("Feed", baseObject: Feed()) { feed in
                     feed.set("title", withValue: "My Title")
@@ -30,6 +31,7 @@ class FactoryGirlSwiftTests: XCTestCase {
                     }
                 }
             }
+            
         }
         return Static.instance
     }

@@ -22,6 +22,7 @@ Restrictions:
 
 // TODO: DSL using custom operators?
 // TODO: parent object relationships
+// TODO: lazy closure values
 
 import UIKit
 import CoreData

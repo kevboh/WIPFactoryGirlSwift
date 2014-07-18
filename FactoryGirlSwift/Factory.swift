@@ -61,15 +61,11 @@ class Factory {
         valueDefinitions[propertyName] = FactoryValueDefinition(externalSetter: closure)
     }
     
-    func set(propertyName: String, withFactoryNamed factoryName: String) {
-        valueDefinitions[propertyName] = FactoryValueDefinition(factoryName: factoryName)
-    }
-    
-    func set(propertyName: String, withFactoryNamed factoryName: String, instanceDefinition: InstanceDefinition) {
+    func set(propertyName: String, withFactoryNamed factoryName: String, instanceDefinition: InstanceDefinition? = nil) {
         valueDefinitions[propertyName] = FactoryValueDefinition(factoryName: factoryName, instanceDefinition: instanceDefinition)
     }
     
-    func set(propertyName: String, withCollectionOfFactoriesNamed factoryName: String, count: Int, instanceDefinitions: CollectionInstanceDefinition?) {
+    func set(propertyName: String, withCollectionOfFactoriesNamed factoryName: String, count: Int, instanceDefinitions: CollectionInstanceDefinition? = nil) {
         let collectionSetter: (FactoryBuilder) -> AnyObject = { builder in
             // Must be an NSMutableArray since arrays are structs in swift
             var collection: NSMutableArray = []
@@ -139,13 +135,8 @@ class Factory {
         // Closure setter: return the result of a closure
         convenience init(externalSetter: () -> AnyObject) { self.init(valueSetter: { builder in externalSetter() }) }
         
-        // Factory setter: return something built from another factory
-        convenience init(factoryName: String) {
-            self.init(factoryName: factoryName, instanceDefinition: nil)
-        }
-        
         // Full factory setter: return something built from another factory, with a custom instance definition
-        convenience init(factoryName: String, instanceDefinition: InstanceDefinition?) {
+        convenience init(factoryName: String, instanceDefinition: InstanceDefinition? = nil) {
             let setter: (FactoryBuilder) -> AnyObject = { builder in
                 return builder._buildFromFactory(factoryName, alteredDefinition: instanceDefinition)!
             }
