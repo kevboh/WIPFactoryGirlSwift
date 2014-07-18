@@ -57,13 +57,20 @@ class FactoryBuilder {
         return nil
     }
     
-    func _buildObject(object: FactoryBuildable, fromFactory factory: Factory) -> FactoryBuildable? {
-        // TODO factory hierarchy, object stacks
+    func _buildObject(object: FactoryBuildable, fromFactory: Factory) -> FactoryBuildable? {
+        // TODO: object stacks?
         
-        var currentFactory: Factory? = factory
+        // Order factories from root to leaf
+        var orderedFactories: Array<Factory> = []
+        var currentFactory: Factory? = fromFactory
         while let f = currentFactory {
-            _setAttributesOnBuildObject(object, fromFactory: f)
+            orderedFactories.append(f)
             currentFactory = f.superFactory
+        }
+        orderedFactories = orderedFactories.reverse()
+        
+        for factory in orderedFactories {
+            _setAttributesOnBuildObject(object, fromFactory: factory)
         }
         
         return object
