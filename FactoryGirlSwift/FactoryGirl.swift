@@ -33,7 +33,8 @@ class FactoryGirl {
     
     var factoriesByName: Dictionary<String, Factory> = [:]
     
-    init (definitions: FactoriesDefinition) {
+    convenience init (definitions: FactoriesDefinition) {
+        self.init()
         definitions(self)
     }
     
