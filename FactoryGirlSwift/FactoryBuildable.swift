@@ -10,7 +10,7 @@ import Foundation
 
 // Declare a common protocol so non-NSObject class types can be created with factories
 // TODO: change back to @class_protocol; see https://devforums.apple.com/thread/230764?
-@objc protocol FactoryBuildable {
+@objc public protocol FactoryBuildable {
     // Just standard KVO
     func setValue(value: AnyObject!, forKey key: String!)
 }

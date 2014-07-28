@@ -23,6 +23,7 @@ class DSLTests: XCTestCase {
     }
 
     func testDSL() {
+        
         define("Feed", Feed()) { feed in
             feed["title"] = "My Title"
             feed["firstItem"] = theFactory("FeedItem")

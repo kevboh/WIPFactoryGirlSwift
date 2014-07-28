@@ -8,14 +8,17 @@
 
 import UIKit
 
-class Feed: NSObject {
-    var title: String?
-    var timestamp: NSDate?
-    var userID: NSNumber?
-    var items: [FeedItem]?
-    var firstItem: FeedItem?
-    var lastItem: FeedItem?
-    override var description: String {
+public class Feed: NSObject {
+    public init() {
+        super.init()
+    }
+    public var title: String?
+    public var timestamp: NSDate?
+    public var userID: NSNumber?
+    public var items: [FeedItem]?
+    public var firstItem: FeedItem?
+    public var lastItem: FeedItem?
+    override public var description: String {
         return "\nFeed titled \(title) for user \(userID) at \(timestamp), items: \(items)"
     }
 }

@@ -13,15 +13,15 @@ let globalFactoryGirl: FactoryGirl = FactoryGirl()
 
 // We use trampoline objects to bounce setters to factories,
 // define some closures to make building the trampolines easier.
-typealias DSLDefinition = (FactoryTrampoline) -> ()
-typealias DSLArrayDefinition = (Int, FactoryTrampoline) -> ()
+public typealias DSLDefinition = (FactoryTrampoline) -> ()
+public typealias DSLArrayDefinition = (Int, FactoryTrampoline) -> ()
 
 // DEFINERS
 
 /// Defines a factory with the given name. The base argument defines an auto-closure that should create
 /// the object the factory will build upon. The definition closure provides an opportunity to set
 /// properties on the factory using string subscript syntax.
-func define(factoryName: String, base: @auto_closure () -> FactoryBuildable, definition: DSLDefinition) {
+public func define(factoryName: String, base: @auto_closure () -> FactoryBuildable, definition: DSLDefinition) {
     globalFactoryGirl.define(factoryName, baseObject: base) { factory in
         FactoryTrampoline.defineAndApply(definition, toFactory: factory)
     }
@@ -29,19 +29,19 @@ func define(factoryName: String, base: @auto_closure () -> FactoryBuildable, def
 
 //// SETTERS
 
-func theFactory(factoryName: String, instanceDefinition: DSLDefinition? = nil) -> ValueSetterTrampoline {
+public func theFactory(factoryName: String, instanceDefinition: DSLDefinition? = nil) -> ValueSetterTrampoline {
     return ValueSetterTrampoline(factoryName: factoryName, instanceDefinition)
 }
 
-extension Int {
-    func ofFactory(factoryName: String, definitions: DSLArrayDefinition? = nil) -> ValueSetterTrampoline {
+public extension Int {
+    public func ofFactory(factoryName: String, definitions: DSLArrayDefinition? = nil) -> ValueSetterTrampoline {
         return ValueSetterTrampoline(factoryName: factoryName, count: self, instanceDefinitions: definitions)
     }
 }
 
 //// BUILDERS
 
-func build(factoryName: String, instanceDefinition: DSLDefinition? = nil ) -> FactoryBuildable? {
+public func build(factoryName: String, instanceDefinition: DSLDefinition? = nil ) -> FactoryBuildable? {
     return globalFactoryGirl.build(factoryName) { factory in
         if let definition = instanceDefinition {
             FactoryTrampoline.defineAndApply(definition, toFactory: factory)
@@ -51,7 +51,7 @@ func build(factoryName: String, instanceDefinition: DSLDefinition? = nil ) -> Fa
 
 
 
-class FactoryTrampoline {
+public class FactoryTrampoline {
     var valueSetters: Dictionary<String, ValueSetterTrampoline> = [:]
     var subfactoryDefintions: Dictionary<String, (FactoryTrampoline) -> ()> = [:]
     
@@ -67,11 +67,11 @@ class FactoryTrampoline {
         trampoline.apply(toFactory)
     }
     
-    func define(factoryName: String, definition: (FactoryTrampoline) -> ()) {
+    public func define(factoryName: String, definition: (FactoryTrampoline) -> ()) {
         subfactoryDefintions[factoryName] = definition
     }
     
-    subscript(key: String) -> AnyObject? {
+    public subscript(key: String) -> AnyObject? {
         get {
             return valueSetters[key]
         }
@@ -86,18 +86,18 @@ class FactoryTrampoline {
         }
     }
     
-    func apply(toFactory: Factory) {
-        _applySettersToFactory(toFactory);
-        _buildSubfactoriesOfFactory(toFactory);
+    private func apply(toFactory: Factory) {
+        applySettersToFactory(toFactory);
+        buildSubfactoriesOfFactory(toFactory);
     }
     
-    func _applySettersToFactory(factory: Factory) {
+    private func applySettersToFactory(factory: Factory) {
         for (key, setter) in valueSetters {
             setter.apply(key, factory)
         }
     }
     
-    func _buildSubfactoriesOfFactory(factory: Factory) {
+    private func buildSubfactoriesOfFactory(factory: Factory) {
         for (factoryName, definition) in subfactoryDefintions {
             factory.define(factoryName) { subfactory in
                 FactoryTrampoline.defineAndApply(definition, toFactory: subfactory)
@@ -106,10 +106,10 @@ class FactoryTrampoline {
     }
 }
 
-class ValueSetterTrampoline {
-    let apply: (String, Factory) -> ()
+public class ValueSetterTrampoline {
+    private let apply: (String, Factory) -> ()
     
-    class func trampolineForSome(thing: AnyObject) -> ValueSetterTrampoline {
+    private class func trampolineForSome(thing: AnyObject) -> ValueSetterTrampoline {
         if let alreadyASetter = thing as? ValueSetterTrampoline {
             return alreadyASetter
         }
@@ -118,14 +118,14 @@ class ValueSetterTrampoline {
         }
     }
     
-    init(object: AnyObject) {
+    private init(object: AnyObject) {
         apply = { key, factory in
             println("Applying \(key) with value \(object.description)")
             factory.set(key, withValue: object)
         }
     }
     
-    init(factoryName: String, instanceDefinition: DSLDefinition?) {
+    private init(factoryName: String, instanceDefinition: DSLDefinition?) {
         apply = { key, factory in
             println("Applying \(key) with factory \(factoryName)")
             if let definition = instanceDefinition {
@@ -139,7 +139,7 @@ class ValueSetterTrampoline {
         }
     }
     
-    init(factoryName: String, count: Int, instanceDefinitions: DSLArrayDefinition?) {
+    private init(factoryName: String, count: Int, instanceDefinitions: DSLArrayDefinition?) {
         apply = { key, factory in
             println("Applying \(key) with factory \(factoryName) \(count) times")
             if let definitions = instanceDefinitions {

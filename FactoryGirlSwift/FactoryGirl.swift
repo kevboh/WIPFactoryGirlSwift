@@ -28,22 +28,22 @@ import UIKit
 import CoreData
 
 
-class FactoryGirl {
+public class FactoryGirl {
     
-    typealias FactoriesDefinition = (FactoryGirl) -> ()
+    public typealias FactoriesDefinition = (FactoryGirl) -> ()
     
     var factoriesByName: Dictionary<String, Factory> = [:]
     
-    convenience init (definitions: FactoriesDefinition) {
+    public convenience init (definitions: FactoriesDefinition) {
         self.init()
         definitions(self)
     }
     
-    func define(factoryName: String, baseObject: @auto_closure () -> FactoryBuildable, definition: Factory.TemplateDefinition) {
+    public func define(factoryName: String, baseObject: @auto_closure () -> FactoryBuildable, definition: Factory.TemplateDefinition) {
         _define(factoryName, nil, baseObject, definition)
     }
     
-    func define(factoryName: String, entityName: String, definition: Factory.TemplateDefinition) {
+    public func define(factoryName: String, entityName: String, definition: Factory.TemplateDefinition) {
         _define(factoryName, entityName, nil, definition)
     }
     
@@ -62,24 +62,24 @@ class FactoryGirl {
         factoriesByName[factory.name] = factory
     }
     
-    func undefine(factoryName: String) {
+    public func undefine(factoryName: String) {
         factoriesByName.removeValueForKey(factoryName)
     }
     
-    func undefineAll() {
+    public func undefineAll() {
         factoriesByName.removeAll(keepCapacity: false)
     }
     
-    func build(factoryName: String) -> FactoryBuildable? {
+    public func build(factoryName: String) -> FactoryBuildable? {
         return build(factoryName, alteredDefintion: nil)
     }
     
-    func insert(factoryName: String, intoManagedObjectContext: NSManagedObjectContext, alteredDefintion: Factory.InstanceDefinition?) -> FactoryBuildable? {
+    public func insert(factoryName: String, intoManagedObjectContext: NSManagedObjectContext, alteredDefintion: Factory.InstanceDefinition?) -> FactoryBuildable? {
         let builder = FactoryBuilder(managedObjectContext: intoManagedObjectContext, factories: factoriesByName)
         return builder.build(factoryName, alteredDefinition: alteredDefintion)
     }
     
-    func build(factoryName: String, alteredDefintion: Factory.InstanceDefinition?) -> FactoryBuildable? {
+    public func build(factoryName: String, alteredDefintion: Factory.InstanceDefinition?) -> FactoryBuildable? {
         let builder = FactoryBuilder(factories: factoriesByName)
         return builder.build(factoryName, alteredDefinition: alteredDefintion)
     }

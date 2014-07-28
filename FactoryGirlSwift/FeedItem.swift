@@ -8,19 +8,22 @@
 
 import UIKit
 
-class FeedItem: NSObject {
-    var itemID: NSNumber?
-    var userID: NSNumber?
-    var text: String?
-    var commentsCount = 0
-    var likesCount = 0
-    var URL: NSURL?
-    var deleted = false
-    var ordinal = 0
-    override var description: String {
+public class FeedItem: NSObject {
+    public init() {
+        super.init()
+    }
+    public var itemID: NSNumber?
+    public var userID: NSNumber?
+    public var text: String?
+    public var commentsCount = 0
+    public var likesCount = 0
+    public var URL: NSURL?
+    public var deleted = false
+    public var ordinal = 0
+    override public var description: String {
         return "\n<FeedItem>\(itemID), \(text), \(commentsCount), \(likesCount), \(URL), \(deletedDescription)"
     }
-    var deletedDescription: String {
+    public var deletedDescription: String {
         return deleted ? "Deleted" : "Not deleted"
     }
 }
